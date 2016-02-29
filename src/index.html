@@ -1,0 +1,90 @@
+<%
+  var debug = false;
+
+  var states = {};
+  var cids = csv.candidates.map(function(c) { return c.id });
+  var results = json.results.filter(function(result) {
+    if (!states[result.statename]) {
+      states[result.statename] = {
+        delegates: result.delegatecount,
+        name: result.statename,
+        postal: result.statepostal
+      }
+    }
+    if (debug) result.votepct = Math.floor(Math.random() * 1000) / 10;
+    return result.officeid == "P" && cids.indexOf(result.polid * 1) > -1;
+  });
+
+  results.sort(function(a, b) { 
+    if (a.party != b.party) {
+      return a.party == "GOP" ? -1 : 1;
+    }
+    return b.votepct - a.votepct;
+  });
+
+  var now = new Date();
+  var hours = now.getHours();
+  var amPm = hours >= 12 ? "PM" : "AM";
+  if (hours > 12) hours -= 12;
+  var minutes = now.getMinutes();
+  if (minutes < 10) minutes = "0" + minutes;
+  var nowString = "Mar. 1, 2016 at " + hours + ":" + minutes + " " + amPm;
+%><!doctype html>
+<html>
+  <head>
+    <title><%= json.project.title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <%= t.include("partials/_head.html") %>
+  </head>
+  <body>
+
+    <responsive-child>
+      <main class="primaries">
+
+        <form class="controls">
+          <span class="party">
+            Party: 
+            <a class="party-select" data-party="All">All</a> | 
+            <a class="party-select selected" data-party="GOP">Republican</a> | 
+            <a class="party-select" data-party="Dem">Democrat</a>
+          </span>
+          <span class="state">
+            State:
+            <select class="state-select">
+              <% for (var s in states) { %>
+              <option value="<%= states[s].postal %>"><%= s %></option>
+              <% } %>
+            </select>
+          </span>
+        </form>
+
+        <div class="results" data-filter="GOP">
+          <div class="result GOP" data-state="CO"><h2>No results</h2></div>
+          <% results.forEach(function(result) { %>
+          <div class="result <%= result.party %>" data-state="<%= result.statepostal %>">
+            <h2 class="name">
+              <%= result.first %> <%= result.last %>
+              <% if (result.winner) { %>
+                <span class="winner">&#9745;</span>
+              <% } %>
+            </h2>
+            <hr>
+            <h3 class="votes"><%= result.votepct %>%</h3>
+          </div>
+          <% }) %>
+          <div class="result Dem" data-state="AK"><h2>No results</h2></div>
+        </div>
+        
+        <div class="updated">Updated as of <%= nowString %></div>
+      </main>
+    </responsive-child>
+
+    <script src="app.js" async></script>
+    <% if (json.project.production) { %>
+    <%= !json.project.embedded ? t.include("partials/_foot.html") : "" %>
+    <%= t.include("partials/_workHere.html") %>
+    <% } %>
+  </body>
+</html>

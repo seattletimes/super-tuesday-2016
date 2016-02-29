@@ -1,0 +1,125 @@
+@import "seattletimes";
+
+
+
+main.primaries {
+  font-family: @df-sans;
+  font-size: 14px;
+  max-width: 970px;
+  margin: auto;
+
+  .controls {
+    padding: 16px 40px;
+    text-align: center;
+    font-size: 17px;
+
+    @media @mobile {
+      font-size: 15px;
+
+      & > span {
+        display: block;
+      }
+    }
+
+    .party-select {
+      cursor: pointer;
+
+      &.selected {
+        font-weight: bold;
+      }
+    }
+
+    .state-select {
+      margin-left: 20px;
+      border: none;
+      border-bottom: 1px solid @df-light-gray;
+      font-size: 20px;
+    }
+  }
+
+  .results {
+    .display-flex();
+    .justify-content(center);
+
+    @media @mobile {
+      .flex-wrap(wrap);
+    }
+
+    &[data-filter="GOP"] .Dem {
+      display: none;
+    }
+
+    &[data-filter="Dem"] .GOP {
+      display: none;
+    }
+  }
+
+  h2, h3 {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  .result {
+    padding: 8px;
+    border: 4px solid white;
+    text-align: center;
+    .flex(0 1 30%);
+    .display-flex;
+    .flex-direction(column);
+    .justify-content(space-around);
+
+    &.GOP {
+      background: lighten(@st-dark-red, 30%);
+    }
+
+    &.Dem {
+      background: lighten(@st-dark-blue, 10%);
+    }
+
+    &.none {
+      background: @df-light-gray;
+    }
+
+    &.hide {
+      display: none;
+    }
+
+    .name {
+      font-size: 16px;
+      font-weight: normal;
+    }
+
+    .votes {
+      font-size: 36px;
+    }
+
+    hr {
+      margin: 10px auto;
+      border: none;
+      border-top: 1px solid black;
+      width: 50%;
+    }
+
+    @media @mobile {
+      .flex(0 1 50%);
+      .flex-direction(row);
+      .align-items(center);
+      .justify-content(space-between);
+
+      .name, .votes {
+        display: inline;
+        font-size: 16px;
+      }
+
+      hr {
+        display: none;
+      }
+    }
+  }
+}
+
+.updated {
+  text-align: right;
+  font-size: 12px;
+  color: @df-middle-gray;
+}
