@@ -26,7 +26,6 @@ var filter = function() {
   });
 
   stateDetails.forEach(function(el) {
-    console.log(el);
     if (el.getAttribute("data-state") == val) {
       el.classList.add("show");
     } else {
