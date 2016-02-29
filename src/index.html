@@ -12,8 +12,13 @@
         reporting: result.precinctsreportingpct
       }
     }
-    if (debug) result.votepct = Math.floor(Math.random() * 1000) / 10;
+    if (debug) result.votepct = Math.random();
     return result.officeid == "P" && cids.indexOf(result.polid * 1) > -1;
+  });
+
+  //formatting and sanitization
+  results.forEach(function(r) {
+    r.votepct = Math.floor(r.votepct * 1000) / 10;
   });
 
   results.sort(function(a, b) { 
@@ -63,11 +68,9 @@
 
         <div class="state-details">
           <% for (var s in states) { %>
-          <ul class="state" data-state="<%= states[s].postal %>">
-            <li class="name"><label>State:</label> <%= states[s].name %>
-            <li class="count"><label>Delegates:</label> <%= t.formatNumber(states[s].delegatecount || 0) %>
-            <li class="reporting"><label>Precincts reporting:</label> <%= states[s].reporting %>%
-          </ul>
+          <div class="state" data-state="<%= states[s].postal %>">
+            <label>Precincts reporting:</label> <%= states[s].reporting %>%
+          </div>
           <% } %>
         </div>
 

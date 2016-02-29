@@ -13,11 +13,19 @@ main.primaries {
     text-align: center;
     font-size: 17px;
 
+    span.state {
+      margin-left: 20px;
+    }
+
     @media @mobile {
       font-size: 15px;
 
       & > span {
         display: block;
+      }
+
+      span.state {
+        margin-left: 0;
       }
     }
 
@@ -30,7 +38,6 @@ main.primaries {
     }
 
     .state-select {
-      margin-left: 20px;
       border: none;
       border-bottom: 1px solid @df-light-gray;
       font-size: 20px;
@@ -42,19 +49,11 @@ main.primaries {
 
     .state {
       display: none;
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
       text-align: center;
+      font-weight: bold;
 
       &.show {
         display: block;
-      }
-
-      li {
-        display: inline-block;
-        margin: 0 10px;
-        font-weight: bold;
       }
 
       label {
