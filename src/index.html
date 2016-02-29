@@ -8,7 +8,8 @@
       states[result.statename] = {
         delegates: result.delegatecount,
         name: result.statename,
-        postal: result.statepostal
+        postal: result.statepostal,
+        reporting: result.precinctsreportingpct
       }
     }
     if (debug) result.votepct = Math.floor(Math.random() * 1000) / 10;
@@ -59,6 +60,16 @@
             </select>
           </span>
         </form>
+
+        <div class="state-details">
+          <% for (var s in states) { %>
+          <ul class="state" data-state="<%= states[s].postal %>">
+            <li class="name"><label>State:</label> <%= states[s].name %>
+            <li class="count"><label>Delegates:</label> <%= t.formatNumber(states[s].delegatecount || 0) %>
+            <li class="reporting"><label>Precincts reporting:</label> <%= states[s].reporting %>%
+          </ul>
+          <% } %>
+        </div>
 
         <div class="results" data-filter="GOP">
           <div class="result GOP" data-state="CO"><h2>No results</h2></div>

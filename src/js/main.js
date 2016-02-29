@@ -7,6 +7,7 @@ var $ = require("./lib/qsa");
 
 var parties = $(".party-select");
 var stateSelect = document.querySelector(".state-select");
+var stateDetails = $(".state-details .state");
 var resultContainer = document.querySelector(".results");
 var results = $(".result");
 var none = document.querySelector(".result.none");
@@ -23,6 +24,15 @@ var filter = function() {
       el.classList.add("hide");
     }
   });
+
+  stateDetails.forEach(function(el) {
+    console.log(el);
+    if (el.getAttribute("data-state") == val) {
+      el.classList.add("show");
+    } else {
+      el.classList.remove("show");
+    }
+  })
 };
 
 filter();

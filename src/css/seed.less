@@ -37,6 +37,32 @@ main.primaries {
     }
   }
 
+  .state-details {
+    font-size: 17px;
+
+    .state {
+      display: none;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+
+      &.show {
+        display: block;
+      }
+
+      li {
+        display: inline-block;
+        margin: 0 10px;
+        font-weight: bold;
+      }
+
+      label {
+        font-weight: normal;
+      }
+    }
+  }
+
   .results {
     .display-flex();
     .justify-content(center);
