@@ -80,7 +80,7 @@ main.primaries {
     .display-flex();
     .justify-content(center);
 
-    @media @mobile {
+    @media @tablet {
       .flex-wrap(wrap);
     }
 
@@ -130,6 +130,10 @@ main.primaries {
 
     .votes {
       font-size: 36px;
+
+      @media @tablet {
+        font-size: 20px;
+      }
     }
 
     hr {
@@ -137,6 +141,12 @@ main.primaries {
       border: none;
       border-top: 1px solid black;
       width: 50%;
+    }
+
+    @media @tablet {
+      .first-name {
+        display: none;
+      }
     }
 
     @media @mobile {

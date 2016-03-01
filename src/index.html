@@ -81,7 +81,7 @@
           <% results.forEach(function(result) { %>
           <div class="result <%= result.party %>" data-state="<%= result.statepostal %>">
             <h2 class="name">
-              <%= result.first %> <%= result.last %>
+              <span class="first-name"><%= result.first %></span> <%= result.last %>
               <% if (result.winner) { %>
                 <span class="winner">&#9745;</span>
               <% } %>
