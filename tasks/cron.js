@@ -25,7 +25,8 @@ var cron = function() {
   console.log(chalk.bgBlue.white("===Run: %s==="), start.toLocaleString());
   //execute each command, storing error codes for later
   async.eachSeries(commands, function(command, c) {
-    var child = shell.exec(command, { async: true });
+    var child = shell.exec(command, { async: true, silent: true });
+    console.log("Executing: " + command);
     child.on("exit", function(code) {
       if (code) {
         errors.push(code);
