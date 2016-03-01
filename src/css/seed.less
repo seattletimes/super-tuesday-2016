@@ -19,6 +19,7 @@ main.primaries {
 
     @media @mobile {
       font-size: 15px;
+      padding: 4px;
 
       & > span {
         display: block;
@@ -40,12 +41,17 @@ main.primaries {
     .state-select {
       border: none;
       border-bottom: 1px solid @df-light-gray;
-      font-size: 20px;
+      font-size: inherit;
+      text-align: center;
     }
   }
 
   .state-details {
     font-size: 17px;
+
+    @media @mobile {
+      font-size: 13px;
+    }
 
     .state {
       display: none;
@@ -54,6 +60,14 @@ main.primaries {
 
       &.show {
         display: block;
+      }
+
+      span {
+        margin: 0 8px;
+
+        @media @mobile {
+          display: inline-block;
+        }
       }
 
       label {

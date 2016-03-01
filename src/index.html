@@ -49,18 +49,18 @@
     <responsive-child>
       <main class="primaries">
 
-        <form class="controls">
+        <form class="controls" autocomplete="off">
           <span class="party">
             Party: 
-            <a class="party-select" data-party="All">All</a> | 
-            <a class="party-select selected" data-party="GOP">Republican</a> | 
+            <a class="party-select selected" data-party="All">All</a> | 
+            <a class="party-select" data-party="GOP">Republican</a> | 
             <a class="party-select" data-party="Dem">Democrat</a>
           </span>
           <span class="state">
             State:
             <select class="state-select">
               <% for (var s in states) { %>
-              <option value="<%= states[s].postal %>"><%= s %></option>
+              <option value="<%= states[s].postal %>" <%= s == "Texas" ? "selected" : "" %>><%= s %></option>
               <% } %>
             </select>
           </span>
@@ -69,12 +69,14 @@
         <div class="state-details">
           <% for (var s in states) { %>
           <div class="state" data-state="<%= states[s].postal %>">
-            <label>Precincts reporting:</label> <%= states[s].reporting %>%
+            <span><label>Precincts reporting:</label> <%= states[s].reporting %>%</span>
+            <span><label>Dem. delegates:</label> <%= csv.races[states[s].postal].dem_delegates %></span>
+            <span><label>GOP delegates:</label> <%= csv.races[states[s].postal].gop_delegates %></span>
           </div>
           <% } %>
         </div>
 
-        <div class="results" data-filter="GOP">
+        <div class="results" data-filter="All">
           <div class="result GOP" data-state="CO"><h2>No results</h2></div>
           <% results.forEach(function(result) { %>
           <div class="result <%= result.party %>" data-state="<%= result.statepostal %>">
