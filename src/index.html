@@ -49,7 +49,7 @@
     <responsive-child>
       <main class="primaries">
 
-        <form class="controls" autocomplete="off">
+        <form class="controls">
           <span class="party">
             Party: 
             <a class="party-select selected" data-party="All">All</a> | 
@@ -60,7 +60,7 @@
             State:
             <select class="state-select">
               <% for (var s in states) { %>
-              <option value="<%= states[s].postal %>" <%= s == "Texas" ? "selected" : "" %>><%= s %></option>
+              <option value="<%= states[s].postal %>" <%= s == "Alabama" ? "selected" : "" %>><%= s %></option>
               <% } %>
             </select>
           </span>
