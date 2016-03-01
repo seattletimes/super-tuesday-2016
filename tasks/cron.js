@@ -7,11 +7,9 @@ Runs tasks on an automated basis
 /** config variables **/
 
 var branch = "prod"; //Git branch for deployment
-var interval = 1000 * 3; //30 minutes by default
+var interval = 1000 * 2 * 60; //30 minutes by default
 var commands = [
-  "git checkout " + branch,
-  "git pull origin " + branch,
-  "grunt sheets static publish:live"
+  "grunt elex static publish"
 ];
 
 /** end config **/
