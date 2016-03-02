@@ -65,20 +65,20 @@
             State:
             <select class="state-select">
               <% Object.keys(states).sort().forEach(function(s) { %>
-              <option value="<%= states[s].postal %>" <%= s == "Virginia" ? "selected" : "" %>><%= s %></option>
+              <option value="<%= states[s].postal %>" <%= s == "Texas" ? "selected" : "" %>><%= s %></option>
               <% }) %>
             </select>
           </span>
         </form>
 
         <div class="state-details">
-          <% Object.keys(states).sort().forEach(function(s) { %>
+          <% for (var s in states) { %>
           <div class="state" data-state="<%= states[s].postal %>">
             <span><label>Precincts reporting:</label> <%= states[s].reporting %>%</span>
             <span><label>Dem. delegates:</label> <%= csv.races[states[s].postal].dem_delegates %></span>
             <span><label>GOP delegates:</label> <%= csv.races[states[s].postal].gop_delegates %></span>
           </div>
-          <% }) %>
+          <% } %>
         </div>
 
         <div class="results" data-filter="All">
